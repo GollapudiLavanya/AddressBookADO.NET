@@ -9,7 +9,7 @@ namespace AddressBookService
             Console.WriteLine("Address Book Service");
             AddressBookRepository repository = new AddressBookRepository();
             ContactDetails details = new ContactDetails();
-            repository.GetDataInParticularDataRange();
+            repository.CountOfContacts();
         }
     }
 }
