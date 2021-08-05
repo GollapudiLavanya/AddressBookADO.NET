@@ -63,5 +63,33 @@ namespace AddressBookService
                 this.connection.Close(); //closing the connection
             }
         }
+
+        public bool UpdateDataInTable(ContactDetails details)
+        {
+            try
+            {
+                //Query to perform
+                string query = @"update AddressBookTable set Address='TekkaMitta' where FirstName='Sameera'";
+                SqlCommand cmd = new SqlCommand(query, this.connection);
+                this.connection.Open(); //Opening the connection
+                int result = cmd.ExecuteNonQuery();
+                if (result != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                this.connection.Close(); //Closing the connection
+            }
+        }
     }
 }

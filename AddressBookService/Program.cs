@@ -8,11 +8,12 @@ namespace AddressBookService
         {
             Console.WriteLine("Address Book Service");
             AddressBookRepository repository = new AddressBookRepository();
-            bool result = repository.GetAllEmployee();
+            ContactDetails details = new ContactDetails();
+            bool result = repository.UpdateDataInTable(details);
             if (result)
-                Console.WriteLine("Successfully retrieved");
+                Console.WriteLine("Successfully Updated");
             else
-                Console.WriteLine("Not retrived successfully");
+                Console.WriteLine("Not Updated");
         }
     }
 }
