@@ -9,7 +9,12 @@ namespace AddressBookService
             Console.WriteLine("Address Book Service");
             AddressBookRepository repository = new AddressBookRepository();
             ContactDetails details = new ContactDetails();
-            repository.CountOfContacts();
+            bool result = repository.InsertDataIntoTable(details);
+            if (result)
+                Console.WriteLine("Inserted Successfully\n");
+            else
+                Console.WriteLine("Not inserted\n");
+            repository.GetAllEmployee();
         }
     }
 }
