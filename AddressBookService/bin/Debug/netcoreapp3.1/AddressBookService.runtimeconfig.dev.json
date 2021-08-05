@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\lavanya.g\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\lavanya.g\\.nuget\\packages"
+    ]
+  }
+}
