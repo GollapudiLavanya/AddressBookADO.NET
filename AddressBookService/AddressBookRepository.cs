@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -176,21 +177,29 @@ namespace AddressBookService
             }
         }
 
-        public bool InsertDataIntoTable(ContactDetails details)
+        public bool AddContact(ContactDetails details)
         {
             try
             {
-                //Query to perform
-                string query = @"Insert into AddressBookTable values('Mahendra','R','Magunta Layout','Nellore','AndhraPradesh',524003,9937348473,'mahendra@gamil.com','Office','Profession');";
-                SqlCommand cmd = new SqlCommand(query, this.connection);
-                this.connection.Open(); //Opening the connection
-                int result = cmd.ExecuteNonQuery();
-                if (result != 0)
+                using (this.connection)
                 {
-                    return true;
-                }
-                else
-                {
+                    //Adding contact using stored procedure
+                    SqlCommand command = new SqlCommand("dbo.AddContact", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@FirstName", details.FirstName);
+                    command.Parameters.AddWithValue("@LastName", details.LastName);
+                    command.Parameters.AddWithValue("@Address", details.Address);
+                    command.Parameters.AddWithValue("@City", details.City);
+                    command.Parameters.AddWithValue("@State", details.State);
+                    command.Parameters.AddWithValue("@Zip", details.zip);
+                    command.Parameters.AddWithValue("@PhoneNumber", details.PhoneNumber);
+                    command.Parameters.AddWithValue("@Email", details.Email);
+                    command.Parameters.AddWithValue("@AddressBookName", details.AddressBookName);
+                    command.Parameters.AddWithValue("@RelationType", details.ContactType);
+                    this.connection.Open(); //Opening the connection
+                    var result = command.ExecuteNonQuery();
+                    if (result != 0)
+                        return true;
                     return false;
                 }
             }
